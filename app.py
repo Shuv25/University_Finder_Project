@@ -10,7 +10,7 @@ import joblib
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://root:reckless@localhost/admissionproject'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:reckless@localhost/admissionproject'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
@@ -18,6 +18,7 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
